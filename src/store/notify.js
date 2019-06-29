@@ -15,7 +15,7 @@ export default {
     loadMessages(state, payload) {
       state.messageMain = [ ...state.messageMain, ...payload];
     },
-    getNotify(state, payload) {
+    setNotify(state, payload) {
       state.messageMain = payload;
     },
     setLoading(state, payload) {
@@ -26,7 +26,7 @@ export default {
     }
   },
   actions: {
-    getNotify({ commit }) {
+    setNotify({ commit }) {
       commit('setLoading', true);
       axios
         .get('https://tocode.ru/static/c/vue-pro/notifyApi.php')
@@ -42,7 +42,7 @@ export default {
             }
           }
           commit('setMessage', messages);
-          commit('getNotify', messagesMain);
+          commit('setNotify', messagesMain);
         })
         .catch(error => {
           commit('setError', error + ': error Api! :(');
